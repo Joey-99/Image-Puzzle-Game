@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+
+<head>
+	<meta charset="utf-8"/>
+    <title>Image Puzzle</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/image-puzzle.css" rel="stylesheet" />
+    <script src="js/image-puzzle.js"></script>
+</head>
+
+<body>
+    <div id="collage">
+        <h2>Image Puzzle Game</h2>
+        <hr />
+        <div id="playPanel" style="padding:5px;display:none;">
+            <hr />
+            <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;">
+				<div class="controller">
+					<h3>CATEGORY</h3>
+					
+					<label>
+						<input type="radio" name="level" checked="checked" value="images/animal.jpg" onchange="change(this.value)" /> 
+						animal
+					</label>
+					<label>
+						<input type="radio" name="level" value="images/architects.jpg" onchange="change(this.value)" />
+						architects
+					</label>
+					<label>
+						<input type="radio" name="level" value="images/person.jpg" onchange="change(this.value)" />
+						person
+					</label>
+					<label>
+						<input type="radio" name="level" value="images/landscape.jpg" onchange="change(this.value)" />
+						landscape
+					</label>
+					
+				</div>
+				<div style="display: inline-block;vertical-align: top;">
+					<div id="actualImageBox">
+					    
+					    <img id="actualImage" src="images/animal.jpg" alt="" />
+						<div id="timeBox">
+						    Time Taken: <span id="timerPanel"></span> secs
+						</div>
+						<div id="stepBox">
+						    <div>Steps:</div>
+						    <div id="stepCount">0</div>
+						</div>
+					    
+					</div>
+					<div id="gameOver" style="display:none;">
+					    <div style="background-color: #fc9e9e; padding: 5px 10px 20px 10px; text-align: center; ">
+					        <h2 style="text-align:center">Game Over!!</h2>
+					        Congratulations!! <br /> You have completed this picture.
+					        <br /> Steps: <span class="stepCount">0</span> steps.
+					        <br /> Time Taken: <span class="timeCount">0</span> seconds<br />
+					        <div>
+					            <button type="button" onclick="window.location.reload(true);">Play Again</button>
+					        </div>
+					    </div>
+					</div>
+				</div>
+				
+				<div class="right_box">
+					<ul id="sortable" class="sortable"></ul>
+					
+				</div>
+                
+            </div>
+        </div>
+        
+		<script src="js/jquery-2.0.0.min.js"></script>
+        <script>
+            window.onload = function () {
+                var value = document.querySelector('.controller input[type="radio"]:checked').getAttribute('value');
+                imagePuzzle.startGame(value,3);
+            };
+			function change(image){
+				$("#gameOver").hide();
+				$("#actualImageBox").show();
+				imagePuzzle.startGame(image,3);
+			}
+        </script>
+    </div>
+</body>
+</html>
